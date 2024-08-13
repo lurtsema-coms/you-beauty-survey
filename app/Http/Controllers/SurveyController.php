@@ -74,6 +74,6 @@ class SurveyController extends Controller
 
         $request->validate($validationRules);
 
-        return redirect()->back()->with(['success' => 'Survey form response submitted successfully.']);
+        return redirect()->back()->with(['success' => 'Thank you for taking the time to complete our survey. Your feedback is valuable to us and will help us enhance our services to better meet your needs.']);
     }
 }

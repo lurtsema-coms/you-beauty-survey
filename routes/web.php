@@ -22,6 +22,8 @@ Route::get('/', function () {
     return view('index');
 });
 
+Route::post('/response', [SurveyController::class, 'storeResponse'])->name('response.store');
+
 // Route::get('/dashboard', function () {
 //     return view('dashboard');
 // })->middleware(['auth', 'verified'])->name('dashboard');

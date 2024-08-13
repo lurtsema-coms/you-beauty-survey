@@ -50,4 +50,30 @@ class SurveyController extends Controller
 
         return redirect(route('survey'))->with(['success' => 'Survey form submitted successfully.']);
     }
+
+    public function storeResponse(Request $request)
+    {
+        $validationRules = [
+            'question-1' => ['required'],
+            'question-2' => ['required'],
+            'question-3' => ['required'],
+            'question-9' => ['required'],
+            'question-10' => ['required'],
+        ];
+
+        $question6 = config('global.question_6.options');
+        $question8 = config('global.question_8.options');
+
+        foreach ($question6 as $index => $option) {
+            $validationRules["question-6-$index"] = ['required'];
+        }
+
+        foreach ($question8 as $index => $option) {
+            $validationRules["question-8-$index"] = ['required'];
+        }
+
+        $request->validate($validationRules);
+
+        return redirect()->back()->with(['success' => 'Survey form response submitted successfully.']);
+    }
 }

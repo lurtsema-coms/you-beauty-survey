@@ -14,7 +14,7 @@
     </head>
     <body class="antialiased bg-gray-100">
       @if (session('success'))
-      <div class="mx-auto space-y-6 max-w-7xl sm:px-6 lg:px-8">
+      <div class="max-w-4xl mx-auto space-y-6 sm:px-6 lg:px-8">
         <div id="toast-success" class="flex items-center w-full p-4 mt-10 mb-4 text-gray-500 bg-white rounded-lg shadow" role="alert">
           <div class="inline-flex items-center justify-center flex-shrink-0 w-8 h-8 text-green-500 bg-green-100 rounded-lg">
               <svg class="w-5 h-5" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 20 20">
@@ -33,7 +33,7 @@
       </div>
       @endif
       @if($errors->any())
-      <div class="mx-auto space-y-6 max-w-7xl sm:px-6 lg:px-8">
+      <div class="max-w-4xl mx-auto space-y-6 sm:px-6 lg:px-8">
         <div id="toast-danger" class="flex items-center w-full p-4 mt-10 mb-4 text-gray-500 bg-white rounded-lg shadow " role="alert">
           <div class="inline-flex items-center justify-center flex-shrink-0 w-8 h-8 text-red-500 bg-red-100 rounded-lg ">
               <svg class="w-5 h-5" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 20 20">
@@ -90,7 +90,7 @@
         <main class="my-12">
           <form id="response-form" action="{{ route('response.store') }}" method="POST">
             @csrf
-            <div class="mx-auto space-y-6 max-w-7xl sm:px-6 lg:px-8">
+            <div class="max-w-4xl mx-auto space-y-6 sm:px-6 lg:px-8">
               <div class="p-4 bg-white shadow sm:p-8 sm:rounded-lg">
                 <div class="max-w-xl">
                     <div class="relative w-20 h-20 overflow-hidden">

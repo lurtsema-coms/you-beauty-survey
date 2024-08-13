@@ -12,7 +12,7 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('choices', function (Blueprint $table) {
-            $table->string('id')->primary();
+            $table->increments('id');
             $table->string('question_id')->references('id')->on('questions');
             $table->string('choice');
             $table->timestamps();

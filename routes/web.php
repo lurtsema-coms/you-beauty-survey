@@ -2,10 +2,8 @@
 
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\SurveyController;
-use App\Models\Choice;
-use App\Models\Question;
-use App\Models\Survey;
 use Illuminate\Support\Facades\Route;
+use Maatwebsite\Excel\Facades\Excel;
 
 /*
 |--------------------------------------------------------------------------
@@ -22,6 +20,8 @@ Route::get('/', function () {
     return view('index');
 });
 
+Route::get('/download-response', fn() => Excel::download(new \App\Exports\FormResponseExport, 'form-response.xlsx'));
+
 Route::post('/response', [SurveyController::class, 'storeResponse'])->name('response.store');
 
 // Route::get('/dashboard', function () {
@@ -29,14 +29,14 @@ Route::post('/response', [SurveyController::class, 'storeResponse'])->name('resp
 // })->middleware(['auth', 'verified'])->name('dashboard');
 
 
-Route::middleware('auth')->group(function () {
-    Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
-    Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
-    Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
+// Route::middleware('auth')->group(function () {
+//     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
+//     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
+//     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 
-    Route::get('/survey', [SurveyController::class, 'index'])->name('survey');
+//     Route::get('/survey', [SurveyController::class, 'index'])->name('survey');
 
-    Route::post('/survey', [SurveyController::class, 'store'])->name('survey.store');
-});
+//     Route::post('/survey', [SurveyController::class, 'store'])->name('survey.store');
+// });
 
 require __DIR__ . '/auth.php';

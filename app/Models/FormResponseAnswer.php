@@ -39,7 +39,8 @@ class FormResponseAnswer extends Model
         }
 
         return self::query()
-            ->select('form_response_id', ...$groupConcatQuery)
+            ->leftJoin('form_responses', 'form_response_answers.form_response_id', '=', 'form_responses.id')
+            ->select('form_response_id', 'form_responses.created_at', ...$groupConcatQuery)
             ->groupBy('form_response_id');
     }
 }

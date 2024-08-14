@@ -18,6 +18,9 @@ return new class extends Migration
             $table->string('question');
             $table->text('value')->nullable();
             $table->timestamps();
+
+            $table->index('form_response_id');
+            $table->index('question');
         });
     }
 

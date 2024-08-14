@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use App\Models\Choice;
+use App\Models\FormResponse;
+use App\Models\FormResponseAnswer;
 use App\Models\Question;
 use App\Models\Survey;
 use Illuminate\Http\Request;
@@ -73,6 +75,19 @@ class SurveyController extends Controller
         }
 
         $request->validate($validationRules);
+
+        $formResponse = FormResponse::create();
+        $formResponseAnswers = [];
+
+        foreach ($request->except('_token') as $key => $value) {
+            $formResponseAnswers[] = [
+                'question' => $key,
+                'value' => $value,
+            ];
+        }
+
+
+        $formResponse->formResponseAnswers()->createMany($formResponseAnswers);
 
         return redirect()->back()->with(['success' => 'Thank you for taking the time to complete our survey. Your feedback is valuable to us and will help us enhance our services to better meet your needs.']);
     }

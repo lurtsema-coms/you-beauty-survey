@@ -156,12 +156,12 @@
                 <div class="max-w-xl">
                   <h1>4. {{ config('global.question_4.question') }}</h1>
                   <div class="flex flex-col gap-4 p-5 border border-gray-300 rounded-md shadow-sm">
-                      @foreach (config('global.question_4.options')  as $choice)
+                      @foreach (config('global.question_4.options')  as $index => $choice)
                        @php
                           $randId = uniqid()
                       @endphp
                       <div class="flex items-center">
-                        <input id="{{ $randId }}" type="checkbox" value="{{ $choice }}" name="question-4[]" class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 focus:ring-blue-500 focus:ring-2">
+                        <input id="{{ $randId }}" type="checkbox" value="1" name="question-4-{{ $index }}" class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 focus:ring-blue-500 focus:ring-2">
                         <label for="{{ $randId }}" class="text-sm font-medium text-gray-900 ms-2">{{ $choice }}</label>
                       </div>
                       @endforeach
@@ -174,12 +174,12 @@
                 <div class="max-w-xl">
                   <h1>5. {{ config('global.question_5.question') }}</h1>
                   <div class="flex flex-col gap-4 p-5 border border-gray-300 rounded-md shadow-sm">
-                      @foreach (config('global.question_5.options')  as $choice)
+                      @foreach (config('global.question_5.options')  as $index => $choice)
                        @php
                           $randId = uniqid()
                       @endphp
                       <div class="flex items-center">
-                        <input id="{{ $randId }}" type="checkbox" value="{{ $choice }}" name="question-5[]" class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 focus:ring-blue-500 focus:ring-2">
+                        <input id="{{ $randId }}" type="checkbox" value="1" name="question-5-{{ $index }}" class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 focus:ring-blue-500 focus:ring-2">
                         <label for="{{ $randId }}" class="text-sm font-medium text-gray-900 ms-2">{{ $choice }}</label>
                       </div>
                       @endforeach
@@ -235,12 +235,12 @@
                 <div class="max-w-xl">
                   <h1>7. {{ config('global.question_7.question') }}</h1>
                   <div class="flex flex-col gap-4 p-5 border border-gray-300 rounded-md shadow-sm">
-                      @foreach (config('global.question_7.options')  as $choice)
+                      @foreach (config('global.question_7.options')  as $index => $choice)
                        @php
                           $randId = uniqid()
                       @endphp
                       <div class="flex items-center">
-                        <input id="{{ $randId }}" type="checkbox" value="{{ $choice }}" name="question-7[]" class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 focus:ring-blue-500 focus:ring-2">
+                        <input id="{{ $randId }}" type="checkbox" value="1" name="question-7-{{ $index }}" class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 focus:ring-blue-500 focus:ring-2">
                         <label for="{{ $randId }}" class="text-sm font-medium text-gray-900 ms-2">{{ $choice }}</label>
                       </div>
                       @endforeach

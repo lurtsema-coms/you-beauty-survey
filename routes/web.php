@@ -1,7 +1,9 @@
 <?php
 
+use App\Exports\FormResponseExport;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\SurveyController;
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use Maatwebsite\Excel\Facades\Excel;
 
@@ -20,7 +22,14 @@ Route::get('/', function () {
     return view('index');
 });
 
-Route::get('/download-response', fn() => Excel::download(new \App\Exports\FormResponseExport, 'form-response.xlsx'));
+
+Route::get('/export-response', function (Request $request) {
+    $password = $request->password;
+    if ($password !== env('EXPORT_PASSWORD', 'password')) {
+        return redirect('/')->with('error', 'Invalid password.');
+    }
+    return Excel::download(new FormResponseExport, 'form-response.xlsx');
+})->name('response.export');
 
 Route::post('/response', [SurveyController::class, 'storeResponse'])->name('response.store');
 

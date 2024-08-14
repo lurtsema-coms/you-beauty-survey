@@ -32,7 +32,7 @@
         </div>
       </div>
       @endif
-      @if($errors->any())
+      @if($errors->any() || session('error'))
       <div class="max-w-4xl mx-auto space-y-6 sm:px-6 lg:px-8">
         <div id="toast-danger" class="flex items-center w-full p-4 mt-10 mb-4 text-gray-500 bg-white rounded-lg shadow " role="alert">
           <div class="inline-flex items-center justify-center flex-shrink-0 w-8 h-8 text-red-500 bg-red-100 rounded-lg ">
@@ -41,7 +41,7 @@
               </svg>
               <span class="sr-only">Error icon</span>
           </div>
-          <div class="text-sm font-normal ms-3">Please answer all required fields.</div>
+          <div class="text-sm font-normal ms-3">{{ session('error') ?: 'Please answer all required fields.' }}</div>
           <button type="button" class="ms-auto -mx-1.5 -my-1.5 bg-white text-gray-400 hover:text-gray-900 rounded-lg focus:ring-2 focus:ring-gray-300 p-1.5 hover:bg-gray-100 inline-flex items-center justify-center h-8 w-8" data-dismiss-target="#toast-danger" aria-label="Close">
               <span class="sr-only">Close</span>
               <svg class="w-3 h-3" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 14 14">
@@ -91,7 +91,7 @@
           <form id="response-form" action="{{ route('response.store') }}" method="POST">
             @csrf
             <div class="max-w-4xl mx-auto space-y-6 sm:px-6 lg:px-8">
-              <div class="p-4 bg-white shadow sm:p-8 sm:rounded-lg">
+              <div class="flex items-start justify-between p-4 bg-white shadow sm:p-8 sm:rounded-lg">
                 <div class="max-w-xl">
                     <div class="relative w-20 h-20 overflow-hidden">
                       <img src="{{ asset('logo.png') }}" alt="">
@@ -99,6 +99,9 @@
                     <h1 class="text-lg font-bold">You Salon & MedSpa Customer Survey</h1>
                     <p class="text-sm text-gray-500">We greatly appreciate your trust in our beauty lounge services and are always striving to enhance your experience. To ensure we continue to meet your expectations and provide the highest quality service, we kindly ask for a few moments of your time to complete this short survey. Your feedback is incredibly important to us, as it helps us understand your needs, preferences, and areas where we can improve. Thank you for being an essential part of our journey to excellence.</p>
                 </div>
+                <x-primary-button type="button" onclick="exportResponses()">
+                    {{ __('Export Responses') }}
+                </x-primary-button>
               </div>
 
               <div class="p-4 bg-white shadow sm:p-8 sm:rounded-lg">
@@ -302,7 +305,7 @@
 
               <div class="p-4 bg-white shadow sm:p-8 sm:rounded-lg">
                 <div class="flex max-w-xl gap-4">
-                    <x-primary-button data-modal-target="popup-modal" data-modal-toggle="popup-modal" type="button" class="bg-green-700" @click="openModal">
+                    <x-primary-button data-modal-target="popup-modal" data-modal-toggle="popup-modal" type="button" class="bg-green-700">
                         {{ __('Save') }}
                     </x-primary-button>
                 </div>
@@ -317,6 +320,14 @@
         if (form?.reportValidity()) {
             form.submit();
             document.querySelector('#loading-indicator').classList.remove('hidden');
+        }
+      }
+
+      function exportResponses() {
+        const password = prompt('Please enter the password to export the responses:');
+
+        if (password) {
+          location.assign("{{ route('response.export') }}?password=" + password);
         }
       }
     </script>

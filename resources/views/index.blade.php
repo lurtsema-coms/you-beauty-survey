@@ -88,7 +88,7 @@
 
       <div class="min-h-screen">
         <main class="my-12">
-          <form id="response-form" action="{{ route('response.store') }}" method="POST">
+          <form id="response-form" action="{{ route('response.store') }}" method="POST" x-data="{hasUsed: undefined}">
             @csrf
             <div class="max-w-4xl mx-auto space-y-6 sm:px-6 lg:px-8">
               <div class="flex items-start justify-between p-4 bg-white shadow sm:p-8 sm:rounded-lg">
@@ -147,7 +147,7 @@
                           $randId = uniqid()
                       @endphp
                       <div class="flex items-center">
-                        <input id="{{ $randId }}" type="radio" value="{{ $choice }}" name="question-3" class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 focus:ring-blue-500 focus:ring-2" required>
+                        <input x-model="hasUsed" id="{{ $randId }}" type="radio" value="{{ $choice }}" name="question-3" class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 focus:ring-blue-500 focus:ring-2" required>
                         <label for="{{ $randId }}" class="text-sm font-medium text-gray-900 ms-2">{{ $choice }}</label>
                       </div>
                       @endforeach
@@ -155,7 +155,7 @@
                   </div>
               </div>
 
-              <div class="p-4 bg-white shadow sm:p-8 sm:rounded-lg">
+              <div class="p-4 bg-white shadow sm:p-8 sm:rounded-lg" :class="hasUsed !== 'Yes' ? 'opacity-30' : ''">
                 <div class="max-w-xl">
                   <h1>4. {{ config('global.question_4.question') }}</h1>
                   <div class="flex flex-col gap-4 p-5 border border-gray-300 rounded-md shadow-sm">
@@ -164,16 +164,16 @@
                           $randId = uniqid()
                       @endphp
                       <div class="flex items-center">
-                        <input id="{{ $randId }}" type="checkbox" value="1" name="question-4-{{ $index }}" class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 focus:ring-blue-500 focus:ring-2">
+                        <input :disabled="hasUsed !== 'Yes'" id="{{ $randId }}" type="checkbox" value="1" name="question-4-{{ $index }}" class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 focus:ring-blue-500 focus:ring-2">
                         <label for="{{ $randId }}" class="text-sm font-medium text-gray-900 ms-2">{{ $choice }}</label>
                       </div>
                       @endforeach
-                      <x-text-input type="text" name="question-4-other" class="block w-full mt-1 text-sm" placeholder="Other (please specify):" />
+                      <x-text-input x-bind:disabled="hasUsed !== 'Yes'" type="text" name="question-4-other" class="block w-full mt-1 text-sm" placeholder="Other (please specify):" />
                   </div>
                 </div>
               </div>
 
-              <div class="p-4 bg-white shadow sm:p-8 sm:rounded-lg">
+              <div class="p-4 bg-white shadow sm:p-8 sm:rounded-lg" :class="hasUsed !== 'No' ? 'opacity-30' : ''">
                 <div class="max-w-xl">
                   <h1>5. {{ config('global.question_5.question') }}</h1>
                   <div class="flex flex-col gap-4 p-5 border border-gray-300 rounded-md shadow-sm">
@@ -182,11 +182,11 @@
                           $randId = uniqid()
                       @endphp
                       <div class="flex items-center">
-                        <input id="{{ $randId }}" type="checkbox" value="1" name="question-5-{{ $index }}" class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 focus:ring-blue-500 focus:ring-2">
+                        <input :disabled="hasUsed !== 'No'" id="{{ $randId }}" type="checkbox" value="1" name="question-5-{{ $index }}" class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 focus:ring-blue-500 focus:ring-2">
                         <label for="{{ $randId }}" class="text-sm font-medium text-gray-900 ms-2">{{ $choice }}</label>
                       </div>
                       @endforeach
-                      <x-text-input type="text" name="question-5-other" class="block w-full mt-1 text-sm" placeholder="Other (please specify):" />
+                      <x-text-input x-bind:disabled="hasUsed !== 'No'" type="text" name="question-5-other" class="block w-full mt-1 text-sm" placeholder="Other (please specify):" />
                   </div>
                 </div>
               </div>

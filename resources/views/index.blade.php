@@ -99,9 +99,6 @@
                     <h1 class="text-lg font-bold">You Salon & MedSpa Customer Survey</h1>
                     <p class="text-sm text-gray-500">We greatly appreciate your trust in our beauty lounge services and are always striving to enhance your experience. To ensure we continue to meet your expectations and provide the highest quality service, we kindly ask for a few moments of your time to complete this short survey. Your feedback is incredibly important to us, as it helps us understand your needs, preferences, and areas where we can improve. Thank you for being an essential part of our journey to excellence.</p>
                 </div>
-                <x-primary-button type="button" onclick="exportResponses()">
-                    {{ __('Export Responses') }}
-                </x-primary-button>
               </div>
 
               <div class="p-4 bg-white shadow sm:p-8 sm:rounded-lg">
